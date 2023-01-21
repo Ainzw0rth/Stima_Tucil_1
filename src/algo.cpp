@@ -353,8 +353,6 @@ int main() {
             bool inputsalah = false;
             bool inputbenar = false;
             string tempinput;
-            // INPUT KARTU DARI PENGGUNA
-            getline (cin, tempinput);
 
             // inisiasi kartu
             for (int j = 0; j <= 3; j++) {
@@ -366,6 +364,9 @@ int main() {
                 cout << "Masukkan kartu-kartu dengan pemisah spasi, contoh: A 2 8 A atau 1 2 8 1 (kapital dan jumlah spasi berpengaruh, jadi untuk akhir dari input tidak boleh ada spasi) \n";
                 cout << "Untuk J, Q dan K tidak boleh diisi dengan 11, 12, atau 13\n";
 
+                // INPUT KARTU DARI PENGGUNA
+                getline (cin, tempinput);
+                
                 if (tempinput.length() > 11) {
                     inputsalah = true;
                 } else {
@@ -435,7 +436,7 @@ int main() {
                     inputbenar = true;
                 }
             }
-            
+
             // MENCARI SOLUSI
             awal = std::chrono::steady_clock::now();
             setpermutasi(kartu[0], kartu[1], kartu[2], kartu[3], &temp);
