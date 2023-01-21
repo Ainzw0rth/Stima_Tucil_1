@@ -347,12 +347,8 @@ int main() {
         cin >> option;
         cin.ignore();
 
-        if (option == 1) {         
-            int ctr = 0;
-            int ctrinput = 0;
-            bool inputsalah = false;
+        if (option == 1) {    
             bool inputbenar = false;
-            string tempinput;
 
             // inisiasi kartu
             for (int j = 0; j <= 3; j++) {
@@ -361,12 +357,15 @@ int main() {
 
             // memasukkan input pengguna kedalam array
             while (!inputbenar) {
+                int ctr = 0;
+                int ctrinput = 0;
+                string tempinput;
+                bool inputsalah = false;
                 cout << "Masukkan kartu-kartu dengan pemisah spasi, contoh: A 2 8 A atau 1 2 8 1 (kapital dan jumlah spasi berpengaruh, jadi untuk akhir dari input tidak boleh ada spasi) \n";
                 cout << "Untuk J, Q dan K tidak boleh diisi dengan 11, 12, atau 13\n";
 
                 // INPUT KARTU DARI PENGGUNA
                 getline (cin, tempinput);
-                
                 if (tempinput.length() > 11) {
                     inputsalah = true;
                 } else {
