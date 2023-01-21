@@ -347,13 +347,11 @@ int main() {
         cin >> option;
         cin.ignore();
 
-        if (option == 1) {
-            cout << "Masukkan kartu-kartu dengan pemisah spasi, contoh: A 2 8 A atau 1 2 8 1 (kapital dan jumlah spasi berpengaruh, jadi untuk akhir dari input tidak boleh ada spasi) \n";
-            cout << "Untuk J, Q dan K tidak boleh diisi dengan 11, 12, atau 13\n";
-            
+        if (option == 1) {         
             int ctr = 0;
             int ctrinput = 0;
             bool inputsalah = false;
+            bool inputbenar = false;
             string tempinput;
             // INPUT KARTU DARI PENGGUNA
             getline (cin, tempinput);
@@ -364,123 +362,131 @@ int main() {
             }
 
             // memasukkan input pengguna kedalam array
-            if (tempinput.length() > 11) {
-                inputsalah = true;
-            } else {
-                while (ctrinput <= tempinput.length()-1 & !inputsalah) { // simpan input kedalam variabel
-                    if (kartu[ctr] == 0) {
-                        if (tempinput[ctrinput] == '1') {
-                            kartu[ctr] = 1;
-                        } else if (tempinput[ctrinput] == 'A') {
-                            kartu[ctr] = 1;
-                        } else if (tempinput[ctrinput] == '2') {
-                            kartu[ctr] = 2;
-                        } else if (tempinput[ctrinput] == '3') {
-                            kartu[ctr] = 3;
-                        } else if (tempinput[ctrinput] == '4') {
-                            kartu[ctr] = 4;
-                        } else if (tempinput[ctrinput] == '5') {
-                            kartu[ctr] = 5;
-                        } else if (tempinput[ctrinput] == '6') {
-                            kartu[ctr] = 6;
-                        } else if (tempinput[ctrinput] == '7') {
-                            kartu[ctr] = 7;
-                        } else if (tempinput[ctrinput] == '8') {
-                            kartu[ctr] = 8;
-                        } else if (tempinput[ctrinput] == '9') {
-                            kartu[ctr] = 9;
-                        } else if (tempinput[ctrinput] == 'J') {
-                            kartu[ctr] = 11;
-                        } else if (tempinput[ctrinput] == 'Q') {
-                            kartu[ctr] = 12;
-                        } else if (tempinput[ctrinput] == 'K') {
-                            kartu[ctr] = 13;
+            while (!inputbenar) {
+                cout << "Masukkan kartu-kartu dengan pemisah spasi, contoh: A 2 8 A atau 1 2 8 1 (kapital dan jumlah spasi berpengaruh, jadi untuk akhir dari input tidak boleh ada spasi) \n";
+                cout << "Untuk J, Q dan K tidak boleh diisi dengan 11, 12, atau 13\n";
+
+                if (tempinput.length() > 11) {
+                    inputsalah = true;
+                } else {
+                    while (ctrinput <= tempinput.length()-1 & !inputsalah) { // simpan input kedalam variabel
+                        if (kartu[ctr] == 0) {
+                            if (tempinput[ctrinput] == '1') {
+                                kartu[ctr] = 1;
+                            } else if (tempinput[ctrinput] == 'A') {
+                                kartu[ctr] = 1;
+                            } else if (tempinput[ctrinput] == '2') {
+                                kartu[ctr] = 2;
+                            } else if (tempinput[ctrinput] == '3') {
+                                kartu[ctr] = 3;
+                            } else if (tempinput[ctrinput] == '4') {
+                                kartu[ctr] = 4;
+                            } else if (tempinput[ctrinput] == '5') {
+                                kartu[ctr] = 5;
+                            } else if (tempinput[ctrinput] == '6') {
+                                kartu[ctr] = 6;
+                            } else if (tempinput[ctrinput] == '7') {
+                                kartu[ctr] = 7;
+                            } else if (tempinput[ctrinput] == '8') {
+                                kartu[ctr] = 8;
+                            } else if (tempinput[ctrinput] == '9') {
+                                kartu[ctr] = 9;
+                            } else if (tempinput[ctrinput] == 'J') {
+                                kartu[ctr] = 11;
+                            } else if (tempinput[ctrinput] == 'Q') {
+                                kartu[ctr] = 12;
+                            } else if (tempinput[ctrinput] == 'K') {
+                                kartu[ctr] = 13;
+                            } else {
+                                inputsalah = true;
+                            }              
                         } else {
-                            inputsalah = true;
-                        }              
-                    } else {
-                        if (tempinput[ctrinput] == '0') {
-                            if (kartu[ctr] == 1) {
-                                kartu[ctr] = 10;
+                            if (tempinput[ctrinput] == '0') {
+                                if (kartu[ctr] == 1) {
+                                    kartu[ctr] = 10;
+                                } else {
+                                    inputsalah = true;
+                                }
+                            } else if (tempinput[ctrinput] == ' ') {
+                                ctr++;
                             } else {
                                 inputsalah = true;
                             }
-                        } else if (tempinput[ctrinput] == ' ') {
-                            ctr++;
-                        } else {
+                        }
+                        ctrinput++;
+                    }
+                }
+
+                if (ctr != 3) {
+                    inputsalah = true;
+                } else {
+                    // cek apakah ada yg belum terisi
+                    for (int j = 0; j <= 3; j++) {
+                        if (kartu[j] == 0) {
                             inputsalah = true;
                         }
                     }
-                    ctrinput++;
                 }
-            }
 
-            if (ctr != 3) {
-                inputsalah = true;
-            } else {
-                // cek apakah ada yg belum terisi
-                for (int j = 0; j <= 3; j++) {
-                    if (kartu[j] == 0) {
-                        inputsalah = true;
-                    }
-                }
-            }
-
-            if (inputsalah) {
-                cout << "Input salah\n";
-            } else {
-                // MENCARI SOLUSI
-                awal = std::chrono::steady_clock::now();
-                setpermutasi(kartu[0], kartu[1], kartu[2], kartu[3], &temp);
-                sederhanakanpermutasi(temp, &M);
-                
-                for (i = 0; i<EFF(M); i++) {
-                    algo24(ELMT(M, i, 0), ELMT(M, i, 1), ELMT(M, i, 2), ELMT(M, i, 3), &tempfile);
-                }
-                akhir = std::chrono::steady_clock::now();
-
-                tempfile.close();
-
-                // MENAMPILKAN SOLUSI
-                tempfile.open("../test/temp.txt", ios::in);
-                displayjumlahsolusi(&tempfile);
-                tempfile.close();
-                tempfile.open("../test/temp.txt", ios::in);
-                displaysolusi(&tempfile);
-                tempfile.close();
-                
-                cout << "Apakah anda mau menyimpan solusinya?\n";
-                cout << "1. Iya\n";
-                cout << "Nomor selain opsi diatas untuk tidak\n";
-                cin >> simpan;
-                cin.ignore();
-                
-                // OPSI UNTUK MENYIMPAN FILE
-                if (simpan == 1) {
-                    // menyimpan file
-                    cout << "Masukkan namafile, contoh: solusi.txt\n";
-                    cout << "Note: jika namafile sudah ada di directory, maka program akan meng-overwrite file tersebut\n";
-                    string namafile;
-                    fstream savefile;
-
-                    getline (cin, namafile);
-                    remove(namafile.c_str());
-                    savesolusi("../test/temp.txt", path+namafile);
-                    
-                    // closing
-                    tempfile.close();
-                    remove("../test/temp.txt");
-
-                    cout << "File telah disimpan\n";
+                if (inputsalah) {
+                    system("cls");
+                    cout << "Input salah, silahkan coba masukkan kartu-kartu yang benar\n";
                 } else {
-                    // closing
-                    tempfile.close();
-                    remove("../test/temp.txt");
+                    inputbenar = true;
                 }
-                
-                std::cout << "Waktu eksekusi program : " << std::chrono::duration_cast<std::chrono::seconds>(akhir - awal).count() << " detik\n";
-
             }
+            
+            // MENCARI SOLUSI
+            awal = std::chrono::steady_clock::now();
+            setpermutasi(kartu[0], kartu[1], kartu[2], kartu[3], &temp);
+            sederhanakanpermutasi(temp, &M);
+            
+            for (i = 0; i<EFF(M); i++) {
+                algo24(ELMT(M, i, 0), ELMT(M, i, 1), ELMT(M, i, 2), ELMT(M, i, 3), &tempfile);
+            }
+            akhir = std::chrono::steady_clock::now();
+
+            tempfile.close();
+
+            // MENAMPILKAN SOLUSI
+            tempfile.open("../test/temp.txt", ios::in);
+            displayjumlahsolusi(&tempfile);
+            tempfile.close();
+            tempfile.open("../test/temp.txt", ios::in);
+            displaysolusi(&tempfile);
+            tempfile.close();
+            
+            cout << "Apakah anda mau menyimpan solusinya?\n";
+            cout << "1. Iya\n";
+            cout << "Nomor selain opsi diatas untuk tidak\n";
+            cin >> simpan;
+            cin.ignore();
+            
+            // OPSI UNTUK MENYIMPAN FILE
+            if (simpan == 1) {
+                // menyimpan file
+                cout << "Masukkan namafile, contoh: solusi.txt\n";
+                cout << "Note: jika namafile sudah ada di directory, maka program akan meng-overwrite file tersebut\n";
+                string namafile;
+                fstream savefile;
+
+                getline (cin, namafile);
+                remove(namafile.c_str());
+                savesolusi("../test/temp.txt", path+namafile);
+                
+                // closing
+                tempfile.close();
+                remove("../test/temp.txt");
+
+                cout << "File telah disimpan\n";
+            } else {
+                // closing
+                tempfile.close();
+                remove("../test/temp.txt");
+            }
+            
+            std::cout << "Waktu eksekusi program : " << std::chrono::duration_cast<std::chrono::seconds>(akhir - awal).count() << " detik\n";
+    
             // OPSI UNTUK MELANJUTKAN PROGRAM
             cout << "Apakah anda ingin menggunakan programnya lagi?\n";
             cout << "1. Iya\n";
