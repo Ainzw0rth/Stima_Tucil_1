@@ -315,7 +315,12 @@ void displayjumlahsolusi(fstream* file) {
     while (getline(*file, baris)) {
         jumlahsolusi++;
     }
-    cout << "Terdapat " << jumlahsolusi << " buah solusi\n";   
+
+    if (jumlahsolusi != 0) {
+        cout << "Terdapat " << jumlahsolusi << " buah solusi\n";   
+    } else {
+        cout << "Tidak ada solusi\n";
+    }
 }
 
 int main() {
