@@ -9,10 +9,10 @@ Program memerlukan compiler bahasa C/C++. Untuk instalasinya bisa dilihat lebih 
 Pertama-tama clone dulu repository ini, caranya adalah dengan membuka terminal pada folder dimana kalian mau programnya diclone. Setelah terminal dibuka maka masukan command ini ke terminal:
 
 ```shell
-git clone https://github.com/Ainzw0rth/Stima_Tucil_1.git
+git clone https://github.com/Ainzw0rth/Tucil1_13521069.git
 ```
 
-Setelah repositorynya diclone lakukan command-command berikut untuk memindahkan ke directorynya:
+Setelah repositorynya diclone, buka terminal pada folder repositorynya dan lakukan command-command berikut untuk memindahkan ke directorynya:
 
 ```shell
 cd Stima_Tucil_1

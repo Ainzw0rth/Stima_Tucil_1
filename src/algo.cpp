@@ -341,7 +341,6 @@ int main() {
 
     // looping untuk program
     while (!end) {
-        std::chrono::steady_clock::time_point awal, akhir;
         tempfile.open("../test/temp.txt", std::ios_base::app);
 
         cout << "Pilihan: \n";
@@ -442,14 +441,14 @@ int main() {
             }
 
             // MENCARI SOLUSI
-            awal = std::chrono::steady_clock::now();
+            auto awal = std::chrono::steady_clock::now();
             setpermutasi(kartu[0], kartu[1], kartu[2], kartu[3], &temp);
             sederhanakanpermutasi(temp, &M);
             
             for (i = 0; i<EFF(M); i++) {
                 algo24(ELMT(M, i, 0), ELMT(M, i, 1), ELMT(M, i, 2), ELMT(M, i, 3), &tempfile);
             }
-            akhir = std::chrono::steady_clock::now();
+            auto akhir = std::chrono::steady_clock::now();
 
             tempfile.close();
 
@@ -490,7 +489,8 @@ int main() {
                 remove("../test/temp.txt");
             }
             
-            std::cout << "Waktu eksekusi program : " << std::chrono::duration_cast<std::chrono::seconds>(akhir - awal).count() << " detik\n";
+            auto durasi = std::chrono::duration_cast<std::chrono::nanoseconds>(akhir-awal).count();
+            std::cout << "Waktu eksekusi program : " << durasi << " nanodetik\n";
     
             // OPSI UNTUK MELANJUTKAN PROGRAM
             cout << "Apakah anda ingin menggunakan programnya lagi?\n";
@@ -528,14 +528,14 @@ int main() {
             cout << "\n";
             
             // MENCARI SOLUSI
-            awal = std::chrono::steady_clock::now();
+            auto awal = std::chrono::steady_clock::now();
             setpermutasi(kartu[0], kartu[1], kartu[2], kartu[3], &temp);
             sederhanakanpermutasi(temp, &M);
             
             for (i = 0; i<EFF(M); i++) {
                 algo24(ELMT(M, i, 0), ELMT(M, i, 1), ELMT(M, i, 2), ELMT(M, i, 3), &tempfile);
             }
-            akhir = std::chrono::steady_clock::now();
+            auto akhir = std::chrono::steady_clock::now();
 
             tempfile.close();
 
@@ -576,7 +576,8 @@ int main() {
                 remove("../test/temp.txt");
             }
             
-            std::cout << "Waktu eksekusi program : " << std::chrono::duration_cast<std::chrono::seconds>(akhir - awal).count() << " detik\n";
+            auto durasi = std::chrono::duration_cast<std::chrono::nanoseconds>(akhir-awal).count();
+            std::cout << "Waktu eksekusi program : " << durasi << " nanodetik\n";
 
             // OPSI UNTUK MELANJUTKAN PROGRAM
             cout << "Apakah anda ingin menggunakan programnya lagi?\n";
